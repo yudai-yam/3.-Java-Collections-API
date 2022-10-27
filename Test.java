@@ -5,6 +5,7 @@ public class Test implements CollectionTest {
 
 
     public Test(){
+        System.out.println("Im a constructor!!");
     
     }
 
@@ -16,13 +17,38 @@ public class Test implements CollectionTest {
 
     @Override
     public void runTest(CollectionTest.CollectionType type, CollectionTest.TestType test, int iterations) {
-        
-        switch(testType){
-            case ADD:
+        for (int i=0; i<iterations; i++){
+            switch(testType){
+                case ADD:
+                    switch(collectionType){
+                        case LINKED_LIST:
 
-            case INDEX:
-            
-            case SEARCH:
+                        case ARRAY_LIST:
+
+                        case HASH_MAP:
+                    }
+                    break;
+
+                case INDEX:
+                    switch(collectionType){
+                        case LINKED_LIST:
+
+                        case ARRAY_LIST:
+
+                        case HASH_MAP:
+                    }
+                    break;
+
+                case SEARCH:
+                    switch(collectionType){
+                        case LINKED_LIST:
+
+                        case ARRAY_LIST:
+
+                        case HASH_MAP:
+                    }
+                    break;
+            }
         }
      
     }
