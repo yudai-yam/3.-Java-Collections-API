@@ -1,5 +1,11 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Map.Entry;
 import java.util.concurrent.ThreadLocalRandom;
+
 public class Test implements CollectionTest {
 
     CollectionType collectionType;
@@ -8,7 +14,7 @@ public class Test implements CollectionTest {
 
 
     public Test(){
-        System.out.println("Im a constructor!!");
+        System.out.println("Im a constructor!! idk why it doesn't work");
     }
 
     @Override
@@ -21,12 +27,19 @@ public class Test implements CollectionTest {
     public void runTest(CollectionTest.CollectionType type, CollectionTest.TestType test, int iterations) {
         for (int i=0; i<iterations; i++){
 
+            LinkedList<Person> list = new LinkedList<Person>();
             ArrayList<Person> al = new ArrayList<Person>();
+            HashMap<Integer, Person> hash_map = new HashMap<Integer, Person>();
 
             switch(testType){
                 case ADD:
                     switch(collectionType){
                         case LINKED_LIST:
+                            for (int j=0; j<size; j++){
+                                int k = j+1;
+                                list.add(new Person("Person" + k, ThreadLocalRandom.current().nextInt(0, 100 + 1)));
+                            }
+                            System.out.println(list);
                         break;
 
                         case ARRAY_LIST:                          
@@ -38,6 +51,12 @@ public class Test implements CollectionTest {
                         break;
 
                         case HASH_MAP:
+                            for (int j=0; j<size; j++){
+                                int k = j+1;
+                                hash_map.put(k, new Person("Person" + k, ThreadLocalRandom.current().nextInt(0, 100 + 1)));
+                            }
+                            System.out.println(al);
+                            
                         break;
                     }
                     break;
@@ -45,14 +64,18 @@ public class Test implements CollectionTest {
                 case INDEX:
                     switch(collectionType){
                         case LINKED_LIST:
+                            int list_index = size/2;
+                            System.out.println("The person's name is: " + list.get(list_index).getName() + "and the age is: " + list.get(list_index).getAge());
                         break;
 
                         case ARRAY_LIST:
-                            int index = size/2;
-                            System.out.println("The person's name is: " + al.get(index).getName() + "and the age is: " + al.get(index).getAge());
+                            int array_index = size/2;
+                            System.out.println("The person's name is: " + al.get(array_index).getName() + "and the age is: " + al.get(array_index).getAge());
                         break;
 
                         case HASH_MAP:
+                            int hash_index = size/2;
+                            System.out.println("The person's name is: " + hash_map.get(hash_index).getName() + "and the age is: " + hash_map.get(hash_index).getAge());
                         break;
                     }
                     break;
@@ -60,17 +83,27 @@ public class Test implements CollectionTest {
                 case SEARCH:
                     switch(collectionType){
                         case LINKED_LIST:
+                            for (Person list_person : list){
+                                if (list_person.getName().equals("Person5")){
+                                    System.out.println("Found! The age is "+list_person.getAge());
+                                }
+                            }
                         break;
 
                         case ARRAY_LIST:
-                            for(Person person : al) {
-                                if(person.getName().equals("Person5")) {
-                                    System.out.println("Found! The age is "+person.getAge());
+                            for(Person array_person : al) {
+                                if(array_person.getName().equals("Person5")) {
+                                    System.out.println("Found! The age is "+array_person.getAge());
                                 }
                             }
                         break;
 
                         case HASH_MAP:
+                        for (hash_map hash_person : hash_map.entrySet()) {
+                            if (hash_person.getName().equals("Person5", hash_map.get)) {
+                                return hash_map.getKey();
+                            }
+                        }
                         break;
                     }
                     break;
@@ -78,6 +111,7 @@ public class Test implements CollectionTest {
         }
      
     }
+
 
     public void displayCollection(){
         
