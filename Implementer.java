@@ -6,34 +6,28 @@ import java.util.Objects;
 import java.util.Map.Entry;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Test implements CollectionTest {
+public class Implementer implements CollectionTest {
 
-    CollectionType collectionType;
-    TestType testType;
+    private CollectionType collectionType;
+    private TestType testType;
     private int size;
-
-
-    public Test(){
-        System.out.println("Im a constructor!! idk why it doesn't work");
-    }
 
     @Override
     public void setSize(int size) {
         this.size = size;
-
     }
 
     @Override
-    public void runTest(CollectionTest.CollectionType type, CollectionTest.TestType test, int iterations) {
+    public void runTest(CollectionType type, TestType test, int iterations) {
         for (int i=0; i<iterations; i++){
 
             LinkedList<Person> list = new LinkedList<Person>();
             ArrayList<Person> al = new ArrayList<Person>();
             HashMap<Integer, Person> hash_map = new HashMap<Integer, Person>();
 
-            switch(testType){
+            switch(test){
                 case ADD:
-                    switch(collectionType){
+                    switch(type){
                         case LINKED_LIST:
                             for (int j=0; j<size; j++){
                                 int k = j+1;
@@ -62,7 +56,7 @@ public class Test implements CollectionTest {
                     break;
 
                 case INDEX:
-                    switch(collectionType){
+                    switch(type){
                         case LINKED_LIST:
                             int list_index = size/2;
                             System.out.println("The person's name is: " + list.get(list_index).getName() + "and the age is: " + list.get(list_index).getAge());
@@ -81,7 +75,7 @@ public class Test implements CollectionTest {
                     break;
 
                 case SEARCH:
-                    switch(collectionType){
+                    switch(type){
                         case LINKED_LIST:
                             for (Person list_person : list){
                                 if (list_person.getName().equals("Person5")){
@@ -99,11 +93,11 @@ public class Test implements CollectionTest {
                         break;
 
                         case HASH_MAP:
-                        for (hash_map hash_person : hash_map.entrySet()) {
+                        /*for (hash_map hash_person : hash_map.entrySet()) {
                             if (hash_person.getName().equals("Person5", hash_map.get)) {
                                 return hash_map.getKey();
                             }
-                        }
+                        }*/
                         break;
                     }
                     break;
